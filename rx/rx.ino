@@ -34,6 +34,7 @@ int rx_data(){
       while(!digitalRead(sync_pin)){}
       rx_bit = digitalRead(rx_pin);
       rx_bit? rx_bin[i] = '1':rx_bin[i] = '0';
+      Serial.print(rx_bit? "1":"0");
       if(rx_bit){
           int pow2 = 1;
           for(int y=15-i; y>0 ;y--){
@@ -48,14 +49,3 @@ int rx_data(){
     //Serial.println(num);
     return num;
 }
-/*
-void loop() {
-  unsigned long int st = micros();
-  for(int i=0 ;i<1024 ;i++){
-      rx_data();
-  }
-  Serial.print(micros()-st);
-  Serial.println("us");
-  delay(10000);
-}
-*/

@@ -22,6 +22,7 @@ unsigned int rx_data(){
       bool rx_bit = 0;
       while(!digitalRead(sync_pin)){}
       rx_bit = digitalRead(rx_pin);
+      Serial.print(rx_bit? "1":"0");
       if(rx_bit){
           int pow2 = 1;
           for(byte y=15-i; y>0 ;y--){
@@ -31,6 +32,6 @@ unsigned int rx_data(){
         }
       while(digitalRead(sync_pin)){}
     }
-    Serial.println(num);
+    Serial.print("  ");
     return num;
 }

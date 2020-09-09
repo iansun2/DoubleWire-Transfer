@@ -1,6 +1,6 @@
 #define sync_pin 2
 #define tx_pin 3
-#define sync_delay 400 //us
+#define sync_delay 100 //us
 
 void setup() {
   //Serial.begin(115200);
@@ -10,7 +10,7 @@ void setup() {
   digitalWrite(tx_pin,0);
 }
 
-  int tx_data(int num){
+  int tx_data(unsigned int num){
     digitalWrite(sync_pin,0);
     delayMicroseconds(sync_delay);
     digitalWrite(tx_pin,1);
@@ -31,10 +31,10 @@ void setup() {
   }
   
 void loop() {
-  for(long int i=32700 ;i<65535 ;i++){
-    tx_data(i);
+  //for(long int i=32700 ;i<65535 ;i++){
+    tx_data(65500);
     //Serial.println(i);
     //delay(1);
-  }
+  //}
   
 }
