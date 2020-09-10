@@ -9,7 +9,11 @@ unsigned int rx_data(){
   byte ctrl = 0;
   unsigned int num =0;
     while(1){
-      if(ctrl == 0 && digitalRead(rx_pin)){
+        
+      if(digitalRead(sync_pin)){
+        ctrl = 0;
+      }
+      else if(ctrl == 0 && digitalRead(rx_pin)){
         ctrl = 1;
       }else if(ctrl == 1 && !digitalRead(rx_pin)){
         ctrl = 2;
@@ -17,12 +21,11 @@ unsigned int rx_data(){
         break;
       }
     }
-
     for(byte i=0 ;i<16 ;i++){
       bool rx_bit = 0;
-      while(!digitalRead(sync_pin)){}
+      while(digitalRead(sync_pin) == i%2){}
       rx_bit = digitalRead(rx_pin);
-      Serial.print(rx_bit? "1":"0");
+      //Serial.print(rx_bit? "1":"0");
       if(rx_bit){
           int pow2 = 1;
           for(byte y=15-i; y>0 ;y--){
@@ -30,8 +33,8 @@ unsigned int rx_data(){
           } 
           num += pow2;
         }
-      while(digitalRead(sync_pin)){}
     }
-    Serial.print("  ");
+   
+    //Serial.print("  ");
     return num;
 }

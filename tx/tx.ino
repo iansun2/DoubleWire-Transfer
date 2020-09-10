@@ -1,6 +1,6 @@
 #define sync_pin 2
 #define tx_pin 3
-#define sync_delay 100 //us
+#define sync_delay 8 //us
 
 void setup() {
   //Serial.begin(115200);
@@ -22,9 +22,8 @@ void setup() {
     for(int i=0 ;i<16 ;i++){
       bool tx_bit = num & (0x8000 >> i);
       digitalWrite(tx_pin,tx_bit);
-      digitalWrite(sync_pin,1);
+      digitalWrite(sync_pin,(i+1)%2);
       delayMicroseconds(sync_delay);
-      digitalWrite(sync_pin,0);
       //Serial.print(tx_bit? "1":"0");
     }
     //Serial.println(" ");
